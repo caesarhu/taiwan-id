@@ -1,6 +1,7 @@
 (ns taiwan-id.core
   (:require [clojure.string :as str]
             [clojure.spec.alpha :as s]
+            [clojure.test.check.generators]
             [clojure.spec.gen.alpha :as gen]))
 
 (def header "ABCDEFGHIJKLMNOPQRSTUVWXYZ")

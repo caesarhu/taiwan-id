@@ -2,6 +2,7 @@
   (:require #?(:clj  [clojure.test :refer :all]
                :cljs [cljs.test :refer-macros [deftest is testing]])
             [taiwan-id.core :refer [id-validate id-valid?]]
+            [clojure.test.check.generators]
             [struct.core :as st]))
 
 ;;(stest/instrument `id-validate)
