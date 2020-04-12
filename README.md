@@ -3,7 +3,7 @@
 clojure台灣身分證字號檢核程式庫，提供1個檢核函數及1個struct validator
 
 ## Usage
-[taiwan-id "0.3.1"]
+[taiwan-id "0.3.2"]
 
 (require '[taiwan-id.core :refer [id-validate id-valid?]])
 
