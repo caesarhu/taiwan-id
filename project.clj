@@ -1,4 +1,4 @@
-(defproject taiwan-id "0.3.2"
+(defproject taiwan-id "0.3.3"
   :description "clojure台灣身分證字號檢核程式庫，提供1個檢核函數及1個struct validator"
   :url "https://github.com/caesarhu/taiwan-id.git"
   :license {:name "Eclipse Public License"
@@ -8,10 +8,10 @@
   :min-lein-version "2.7.1"
 
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/clojurescript "1.10.520" :scope "provided"]
+                 [org.clojure/clojurescript "1.10.597" :scope "provided"]
                  [org.clojure/tools.reader "1.3.2"]
                  [funcool/struct "1.4.0"]
-                 [org.clojure/test.check "0.10.0"]]
+                 [org.clojure/test.check "1.0.0"]]
 
   :source-paths ["src"]
 
@@ -22,6 +22,6 @@
 
   :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.3"]
                                   [com.bhauman/rebel-readline-cljs "0.1.4"]
-                                  [eftest "0.5.8"]]
-                   :plugins [[lein-eftest "0.5.8"]]}}
+                                  [eftest "0.5.9"]]
+                   :plugins [[lein-eftest "0.5.9"]]}}
   :repl-options {:print clojure.pprint/pprint})
