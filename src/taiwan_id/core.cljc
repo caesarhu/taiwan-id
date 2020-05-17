@@ -61,6 +61,15 @@
         false))
     false))
 
+(defn is-id? [id]
+  (when (and (string? id)
+             (re-matches re-id id))
+    (let [v (id->vec id)
+          code (id-code v)
+          x (last v)]
+      (when (= x code)
+        id))))
+
 (def id-valid?
   {:message "身分證字號檢核錯誤!!!"
    :optional true
