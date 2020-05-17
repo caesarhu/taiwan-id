@@ -52,14 +52,13 @@
     (mod (- 10 r) 10)))
 
 (defn id-validate [id]
-  (if (and (string? id) (re-matches re-id id))
+  (when (and (string? id)
+             (re-matches re-id id))
     (let [v (id->vec id)
           code (id-code v)
           x (last v)]
-      (if (= x code)
-        (str/upper-case id)
-        false))
-    false))
+      (when (= x code)
+        id))))
 
 (defn is-id? [id]
   (when (and (string? id)
