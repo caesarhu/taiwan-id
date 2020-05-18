@@ -74,6 +74,10 @@
    :optional true
    :validate id-validate})
 
+(def re-foreigner #"^[A-XZ][A-D]\d{8}$")
+(defn foreigner? [s]
+  (re-matches re-foreigner (str/upper-case s)))
+
 (def header-gen (s/gen header-set))
 (def sex-gen (s/gen sex-set))
 (def digit-gen (s/gen digits-set))
