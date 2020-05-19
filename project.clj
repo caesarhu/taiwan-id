@@ -1,3 +1,4 @@
+
 (defproject taiwan-id "0.3.7"
   :description "clojure台灣身分證字號檢核程式庫，提供1個檢核函數及1個struct validator"
   :url "https://github.com/caesarhu/taiwan-id.git"
