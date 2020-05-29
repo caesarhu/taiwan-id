@@ -42,3 +42,10 @@
           invalid (st/validate {:id "R202258765"} id-schema)]
       (t/is (nil? (first valid)))
       (t/is (= {:id "身分證字號檢核錯誤!!!"} (first invalid))))))
+
+(t/deftest some-id-test
+  (t/testing "some-id? 身份證號或外來人口統一證號檢核"
+    (t/is (= "A919518067" (id/some-id? "A919518067")))
+    (t/is (= "SC19810209" (id/some-id? "SC19810209")))
+    (t/is (= "C233825816" (id/some-id? "C233825816")))
+    (t/is (not (id/some-id? "C239825816")))))
