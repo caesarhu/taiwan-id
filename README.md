@@ -1,33 +1,70 @@
 # taiwan-id
 
-clojure台灣身分證字號檢核程式庫，提供1個檢核函數及1個struct validator
+FIXME: description
 
-## Usage
-[taiwan-id "0.3.2"]
+## Developing
 
-(require '[taiwan-id.core :refer [id-validate id-valid?]])
+### Setup
 
-```clojure
-(id-validate id-str) ;; true if valid, false or nil if invalild
+When you first clone this repository, run:
 
-id-valid?         ;; struct validator
-
-;; 用法如core-test.clj
+```sh
+lein duct setup
 ```
 
+This will create files for local configuration, and prep your system
+for the project.
 
+### Environment
 
-## License
+To begin developing, start with a REPL.
 
-Copyright © 2019 FIXME
+```sh
+lein repl
+```
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
+Then load the development environment.
 
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+```clojure
+user=> (dev)
+:loaded
+```
+
+Run `go` to prep and initiate the system.
+
+```clojure
+dev=> (go)
+:duct.server.http.jetty/starting-server {:port 3000}
+:initiated
+```
+
+By default this creates a web server at <http://localhost:3000>.
+
+When you make changes to your source files, use `reset` to reload any
+modified files and reset the server.
+
+```clojure
+dev=> (reset)
+:reloading (...)
+:resumed
+```
+
+### Testing
+
+Testing is fastest through the REPL, as you avoid environment startup
+time.
+
+```clojure
+dev=> (test)
+...
+```
+
+But you can also run tests through Leiningen.
+
+```sh
+lein test
+```
+
+## Legal
+
+Copyright © 2020 FIXME
