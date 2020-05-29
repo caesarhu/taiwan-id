@@ -131,7 +131,7 @@
         uid))))
 
 (def foreigner-old-valid?
-  {:message "外來人士統一證號檢核錯誤!!!"
+  {:message "舊版外來人口統一證號檢核錯誤!!!"
    :optional true
    :validate foreigner-old?})
 
@@ -175,7 +175,7 @@
         uid))))
 
 (def foreigner-id-valid?
-  {:message "外來人口統一證號檢核錯誤!!!"
+  {:message "新版外來人口統一證號檢核錯誤!!!"
    :optional true
    :validate foreigner-id?})
 
@@ -210,3 +210,8 @@
   (or (taiwan-id? id)
       (foreigner-old? id)
       (foreigner-id? id)))
+
+(def some-id-valid?
+  {:message "身份證號或外來人口統一證號檢核錯誤!!!"
+   :optional true
+   :validate some-id?})

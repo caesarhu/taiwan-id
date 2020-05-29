@@ -1,6 +1,6 @@
 # taiwan-id
 
-FIXME: description
+clojure台灣身分證字號檢核程式庫，包含新版及舊版外來人口統一證號檢核
 
 ## Developing
 
@@ -38,15 +38,22 @@ dev=> (go)
 :initiated
 ```
 
-By default this creates a web server at <http://localhost:3000>.
-
-When you make changes to your source files, use `reset` to reload any
-modified files and reset the server.
+提供以下檢核函數：
 
 ```clojure
-dev=> (reset)
-:reloading (...)
-:resumed
+(taiwan-id? id) ; 台灣身分證號檢核
+(foreigner-old? id) ; 舊版外來人口統一證號檢核
+(foreigner-id? id) ; 新版外來人口統一證號檢核
+(some-id? id) ; 身份證號或外來人口統一證號檢核
+```
+
+另外定義了對應的 struct 物件供 struct 運用：
+
+```clojure
+taiwan-id-valid?
+foreigner-old-valid?
+foreigner-id-valid?
+some-id-valid?
 ```
 
 ### Testing
