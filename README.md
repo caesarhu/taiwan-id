@@ -4,72 +4,55 @@ clojure台灣身分證字號檢核程式庫，包含新版及舊版外來人口�
 
 ## Developing
 
-### Setup
+### Unit test
 
-When you first clone this repository, run:
-
-```sh
-lein duct setup
-```
-
-This will create files for local configuration, and prep your system
-for the project.
-
-### Environment
-
-To begin developing, start with a REPL.
-
-```sh
-lein repl
-```
-
-Then load the development environment.
+Run unit test.
 
 ```clojure
-user=> (dev)
-:loaded
-```
-
-Run `go` to prep and initiate the system.
-
-```clojure
-dev=> (go)
-:duct.server.http.jetty/starting-server {:port 3000}
-:initiated
+user=> (unit-test)
+[(.......................)]
+4 tests, 23 assertions, 0 failures.
+=> #:kaocha.result{:count 4, :pass 23, :error 0, :fail 0, :pending 0}
 ```
 
 提供以下檢核函數：
 
 ```clojure
 (taiwan-id? id) ; 台灣身分證號檢核
-(foreigner-old? id) ; 舊版外來人口統一證號檢核
-(foreigner-id? id) ; 新版外來人口統一證號檢核
-(some-id? id) ; 身份證號或外來人口統一證號檢核
+(taiwan-id? "U257566542")
+=> "U257566542"
+
+(taiwan-id? "U257566547")
+=> nil
 ```
 
-另外定義了對應的 struct 物件供 struct 運用：
+提供id-gen產生合法的身分證號：
 
 ```clojure
-taiwan-id-valid?
-foreigner-old-valid?
-foreigner-id-valid?
-some-id-valid?
+(gen/generate id-gen)
+=> "L299653480"
+
+(gen/sample id-gen)
+=>
+("H168593053"
+ "O125420020"
+ "N262705297"
+ "B292429540"
+ "Q248928978"
+ "B121471814"
+ "J207398595"
+ "B173039042"
+ "I213708958"
+ "C249665504")
 ```
 
-### Testing
-
-Testing is fastest through the REPL, as you avoid environment startup
-time.
+定義了id-schema 供malli使用
 
 ```clojure
-dev=> (test)
-...
-```
-
-But you can also run tests through Leiningen.
-
-```sh
-lein test
+(malli.core/validate id-schema "N262705297")
+=> "N262705297"
+(malli.core/validate id-schema "N262705292")
+=> nil
 ```
 
 ## Legal

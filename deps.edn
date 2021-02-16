@@ -1,0 +1,33 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.2"}
+        org.clojure/test.check {:mvn/version "1.1.0"}
+        metosin/malli {:git/url "https://github.com/metosin/malli.git"
+                       :sha "c97967996cd6ddb5a587a34a96e53dd76f9509ac"}}
+ :aliases
+ {:dev {:extra-paths ["dev/src" "test"]
+        :extra-deps {expound/expound {:mvn/version "0.8.9"}
+                     orchestra/orchestra {:mvn/version "2021.01.01-1"}
+                     juxt/clip {:mvn/version "0.21.0"}
+                     aero/aero {:mvn/version "1.1.6"}
+                     org.clojure/tools.namespace {:mvn/version "1.1.0"}
+                     lambdaisland/kaocha {:mvn/version "1.0.732"}}}
+  :test {:extra-paths ["test"]
+         :extra-deps {expound/expound {:mvn/version "0.8.9"}
+                      orchestra/orchestra {:mvn/version "2021.01.01-1"}
+                      juxt/clip {:mvn/version "0.21.0"}
+                      aero/aero {:mvn/version "1.1.6"}
+                      org.clojure/tools.namespace {:mvn/version "1.1.0"}
+                      lambdaisland/kaocha {:mvn/version "1.0.732"}}}
+  :test-chrome {:extra-paths ["test" "cljs-test-runner-out/gen"]
+                :extra-deps  {org.clojure/clojurescript {:mvn/version "1.10.773"}
+                              olical/cljs-test-runner   {:mvn/version "3.8.0" :exclusions [org.clojure/clojurescript]}}
+                :main-opts   ["-m" "cljs-test-runner.main" "-c" "test/cljs-test-opts.edn -x chrome-headless"]}
+  :jar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.171"}}
+        :exec-fn hf.depstar/jar
+        :exec-args {:jar "taiwan-id.jar" :sync-pom true}}
+  :install {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
+            :exec-fn deps-deploy.deps-deploy/deploy
+            :exec-args {:installer :local :artifact "taiwan-id.jar"}}
+  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
+           :exec-fn deps-deploy.deps-deploy/deploy
+           :exec-args {:installer :remote :artifact "taiwan-id.jar"}}}}
