@@ -25,9 +25,9 @@
 
 (defn id->vec-number
   [id]
-  (let [[id-char & other] (map str (seq id))]
-    (concat (char->number id-char) (->> (map char->number other)
-                                        (map second)))))
+  (let [id-chars (->> (map str (seq id))
+                      (map char->number))]
+    (cons (ffirst id-chars) (map second id-chars))))
 
 (defn check-code
   [id]
