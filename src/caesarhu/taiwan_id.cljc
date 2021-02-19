@@ -77,6 +77,6 @@
   (m/-simple-schema
     {:type :string
      :pred taiwan-id?
-     :type-properties {:error/message "必須是合格身分證號或外籍證號!"
+     :type-properties {:error/message "必須是合法身分證號或外籍證號!"
                        :gen/gen id-gen}}))
 

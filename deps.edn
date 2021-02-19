@@ -2,7 +2,7 @@
  :deps {org.clojure/clojure {:mvn/version "1.10.2"}
         org.clojure/test.check {:mvn/version "1.1.0"}
         metosin/malli {:git/url "https://github.com/metosin/malli.git"
-                       :sha "c97967996cd6ddb5a587a34a96e53dd76f9509ac"}}
+                       :sha "8463fb94bc24eeb801adad71344f7225007e492c"}}
  :aliases
  {:dev {:extra-paths ["dev/src" "test"]
         :extra-deps {expound/expound {:mvn/version "0.8.9"}
