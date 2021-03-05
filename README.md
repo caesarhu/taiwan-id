@@ -1,3 +1,5 @@
+![Clojars Version](https://img.shields.io/clojars/v/caesarhu/taiwan-id)
+
 # taiwan-id
 
 clojure台灣身分證字號檢核程式庫，包含新版及舊版外來人口統一證號檢核
