@@ -19,3 +19,4 @@ pom.xml.asc
 /.rebel_readline_history
 /cljs-test-runner-out
 /.cpcache
+/.lsp

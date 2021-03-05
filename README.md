@@ -9,15 +9,22 @@ clojure台灣身分證字號檢核程式庫，包含新版及舊版外來人口�
 Run unit test.
 
 ```clojure
+clojure:
 user=> (unit-test)
 [(.......................)]
 4 tests, 23 assertions, 0 failures.
 => #:kaocha.result{:count 4, :pass 23, :error 0, :fail 0, :pending 0}
+
+clojurescript:
+clj -M:test-chrome
+Chrome Headless 88.0.4324.182 (Linux x86_64): Executed 4 of 4 SUCCESS (0.172 secs / 0.144 secs)
+TOTAL: 4 SUCCESS
 ```
 
 提供以下檢核函數：
 
 ```clojure
+(require '[caesarhu.taiwan-id :refer :all])
 (taiwan-id? id) ; 台灣身分證號檢核
 (taiwan-id? "U257566542")
 => "U257566542"
@@ -29,6 +36,7 @@ user=> (unit-test)
 提供id-gen產生合法的身分證號：
 
 ```clojure
+(require '[clojure.spec.gen.alpha :as gen])
 (gen/generate id-gen)
 => "L299653480"
 
@@ -53,6 +61,9 @@ user=> (unit-test)
 => "N262705297"
 (malli.core/validate id-schema "N262705292")
 => nil
+
+(malli.generator/generate id-schema)
+=> "Q184340736"
 ```
 
 ## Legal

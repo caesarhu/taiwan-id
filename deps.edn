@@ -1,8 +1,7 @@
 {:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.10.2"}
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"}
         org.clojure/test.check {:mvn/version "1.1.0"}
-        metosin/malli {:git/url "https://github.com/metosin/malli.git"
-                       :sha "8463fb94bc24eeb801adad71344f7225007e492c"}}
+        metosin/malli {:mvn/version "0.3.0"}}
  :aliases
  {:dev {:extra-paths ["dev/src" "test"]
         :extra-deps {expound/expound {:mvn/version "0.8.9"}
@@ -21,8 +20,9 @@
   :test-chrome {:extra-paths ["test" "cljs-test-runner-out/gen"]
                 :extra-deps  {org.clojure/clojurescript {:mvn/version "1.10.773"}
                               olical/cljs-test-runner   {:mvn/version "3.8.0" :exclusions [org.clojure/clojurescript]}}
-                :main-opts   ["-m" "cljs-test-runner.main" "-c" "test/cljs-test-opts.edn -x chrome-headless"]}
-  :jar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.171"}}
+                ;:main-opts   ["-m" "cljs-test-runner.main" "-c" "test/cljs-test-opts.edn -x chrome-headless"]
+                :main-opts ["-m" "cljs-test-runner.main" "-c" "test/cljs-test-opts.edn" "-x" "chrome-headless"]}
+  :jar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.193"}}
         :exec-fn hf.depstar/jar
         :exec-args {:jar "taiwan-id.jar" :sync-pom true}}
   :install {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
