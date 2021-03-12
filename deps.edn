@@ -9,14 +9,14 @@
                      juxt/clip {:mvn/version "0.21.0"}
                      aero/aero {:mvn/version "1.1.6"}
                      org.clojure/tools.namespace {:mvn/version "1.1.0"}
-                     lambdaisland/kaocha {:mvn/version "1.0.732"}}}
+                     lambdaisland/kaocha {:mvn/version "1.0.829"}}}
   :test {:extra-paths ["test"]
          :extra-deps {expound/expound {:mvn/version "0.8.9"}
                       orchestra/orchestra {:mvn/version "2021.01.01-1"}
                       juxt/clip {:mvn/version "0.21.0"}
                       aero/aero {:mvn/version "1.1.6"}
                       org.clojure/tools.namespace {:mvn/version "1.1.0"}
-                      lambdaisland/kaocha {:mvn/version "1.0.732"}}}
+                      lambdaisland/kaocha {:mvn/version "1.0.829"}}}
   :test-chrome {:extra-paths ["test" "cljs-test-runner-out/gen"]
                 :extra-deps  {org.clojure/clojurescript {:mvn/version "1.10.773"}
                               olical/cljs-test-runner   {:mvn/version "3.8.0" :exclusions [org.clojure/clojurescript]}}
