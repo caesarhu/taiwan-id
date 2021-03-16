@@ -13,7 +13,11 @@
 (def weight-code [1 9 8 7 6 5 4 3 2 1 1])
 (def re-taiwan #"^[A-Z][12]\d{8}$")
 (def re-foreigner-old #"^[A-Z][A-D]\d{8}$")
-(def re-foreigner-id #"^[A-Z][89]\d{8}$")
+(def re-foreigner #"^[A-Z][89]\d{8}$")
+(def re-coll
+  {:taiwan #"^[A-Z][12]\d{8}$"
+   :foreign #"^[A-Z][89]\d{8}$"
+   :foreign-old #"^[A-Z][A-D]\d{8}$"})
 
 (defn div-mod-10
   [n]
@@ -38,14 +42,18 @@
        10))
 
 (defn taiwan-id?
-  [id]
-  (when-let [uid (and (string? id)
-                      (str/upper-case id))]
-    (when (and (or (re-matches re-taiwan uid)
-                   (re-matches re-foreigner-old uid)
-                   (re-matches re-foreigner-id uid))
-               (= 0 (check-code uid)))
-      uid)))
+  "id: 身分證號或外僑居留證號
+   coll: 選擇要檢核的證號類別 [:taiwan :foreign :foreign-old]
+  "
+  ([id coll]
+   (let [uid (and (string? id)
+                  (str/upper-case id))]
+     (and uid
+          (some #(re-matches % uid) (vals (select-keys re-coll coll)))
+          (= 0 (check-code uid))
+          uid)))
+  ([id]
+   (taiwan-id? id [:taiwan :foreign :foreign-old])))
 
 (def digit-gen
   (s/gen #{"0" "1" "2" "3" "4" "5" "6" "7" "8" "9"}))

@@ -22,7 +22,7 @@
                               olical/cljs-test-runner   {:mvn/version "3.8.0" :exclusions [org.clojure/clojurescript]}}
                 ;:main-opts   ["-m" "cljs-test-runner.main" "-c" "test/cljs-test-opts.edn -x chrome-headless"]
                 :main-opts ["-m" "cljs-test-runner.main" "-c" "test/cljs-test-opts.edn" "-x" "chrome-headless"]}
-  :jar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.193"}}
+  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.193"}}
         :exec-fn hf.depstar/jar
         :exec-args {:jar "taiwan-id.jar" :sync-pom true}}
   :install {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}

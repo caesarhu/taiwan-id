@@ -27,7 +27,9 @@ TOTAL: 4 SUCCESS
 
 ```clojure
 (require '[caesarhu.taiwan-id :refer :all])
-(taiwan-id? id) ; 台灣身分證號檢核
+(taiwan-id? id) ; 台灣身分證號檢核, 包含身分證號、新版及舊版外來人口統一證號
+(taiwan-id? id [:taiwan]) ; 僅檢核身分證號
+(taiwan-id? id [:taiwan :foreign :foreign-old]) ; 檢核身分證號及新舊外來人口統一證號
 (taiwan-id? "U257566542")
 => "U257566542"
 

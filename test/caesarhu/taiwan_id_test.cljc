@@ -38,6 +38,15 @@
     (is (= "A919518067" (taiwan-id? "A919518067")))
     (is (= "SC19810209" (taiwan-id? "SC19810209")))))
 
+(deftest optional-id-test
+  (testing "證號類別測試..."
+    (is (nil? (taiwan-id? "A919518067" [:taiwan :foreign-old])))
+    (is (nil? (taiwan-id? "SC19810209" [:taiwan :foreign])))
+    (is (nil? (taiwan-id? "S149312189" [:foreign :foreign-old])))
+    (is (= "A919518067" (taiwan-id? "A919518067" [:foreign])))
+    (is (= "SC19810209" (taiwan-id? "SC19810209" [:foreign-old])))
+    (is (= "S149312189" (taiwan-id? "S149312189" [:taiwan])))))
+
 (deftest id-gen-test
   (let [sample (gen/sample id-gen 100)]
     (is (= (count sample)
