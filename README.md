@@ -1,4 +1,5 @@
-![Clojars Version](https://img.shields.io/clojars/v/caesarhu/taiwan-id)
+<a href="https://clojars.org/caesarhu/taiwan-id">
+  <img alt="Clojars Version" src="https://img.shields.io/clojars/v/caesarhu/taiwan-id"></a>
 
 # taiwan-id
 
