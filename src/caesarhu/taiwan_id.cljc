@@ -11,9 +11,7 @@
                   0 1 2 3 4 5 6 7 8 9])
 (def char-number-map (zipmap (map str (seq id-char)) char-number))
 (def weight-code [1 9 8 7 6 5 4 3 2 1 1])
-(def re-taiwan #"^[A-Z][12]\d{8}$")
-(def re-foreigner-old #"^[A-Z][A-D]\d{8}$")
-(def re-foreigner #"^[A-Z][89]\d{8}$")
+
 (def re-coll
   {:taiwan #"^[A-Z][12]\d{8}$"
    :foreign #"^[A-Z][89]\d{8}$"
@@ -85,6 +83,6 @@
   (m/-simple-schema
     {:type :string
      :pred taiwan-id?
-     :type-properties {:error/message "必須是合法身分證號或外籍證號!"
+     :type-properties {:error/message "必須是正確身分證號或外籍證號!"
                        :gen/gen id-gen}}))
 

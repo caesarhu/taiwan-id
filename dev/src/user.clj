@@ -3,7 +3,9 @@
             [expound.alpha :as expound]
             [orchestra.spec.test :as stest]
             [kaocha.repl :as k]
-            [juxt.clip.repl :refer [start stop set-init! system]]))
+            [juxt.clip.repl :refer [start stop set-init! system]]
+            [malli.core :as m]
+            [malli-instrument.core :as mi]))
 
 ;;; test
 
