@@ -6,7 +6,7 @@
             [malli.core :as m]))
 
 (def id-char "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-(def header-set (set (map str (seq "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))))
+(def header-set (set (map str (take 26 id-char))))
 (def char-number [10 11 12 13 14 15 16 17 34 18 19 20 21 22 35 23 24 25 26 27 28 29 32 30 31 33
                   0 1 2 3 4 5 6 7 8 9])
 (def char-number-map (zipmap (map str (seq id-char)) char-number))
@@ -48,7 +48,7 @@
                   (str/upper-case id))]
      (and uid
           (some #(re-matches % uid) (vals (select-keys re-coll coll)))
-          (= 0 (check-code uid))
+          (zero? (check-code uid))
           uid)))
   ([id]
    (taiwan-id? id [:taiwan :foreign :foreign-old])))
