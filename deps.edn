@@ -1,35 +1,16 @@
 {:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.10.3"}
-        org.clojure/test.check {:mvn/version "1.1.0"}
-        metosin/malli {:mvn/version "0.5.0"}}
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        ;org.clojure/test.check {:mvn/version "1.1.1"}
+        com.gfredericks/test.chuck {:mvn/version "0.2.13"}
+        ;org.babashka/sci {:mvn/version "0.3.5"}
+        metosin/malli {:mvn/version "0.8.4"}}
  :aliases
- {:dev {:extra-paths ["dev/src" "test"]
-        :extra-deps {expound/expound {:mvn/version "0.8.9"}
-                     orchestra/orchestra {:mvn/version "2021.01.01-1"}
-                     juxt/clip {:mvn/version "0.22.0"}
-                     aero/aero {:mvn/version "1.1.6"}
-                     org.clojure/tools.namespace {:mvn/version "1.1.0"}
-                     setzer22/malli-instrument {:git/url "https://github.com/setzer22/malli-instrument.git"
-                                                :sha "5fdf2cc5ca7a2deabfcd787f1086f6a3e5615936"}
-                     lambdaisland/kaocha {:mvn/version "1.0.829"}}}
-  :test {:extra-paths ["test"]
-         :extra-deps {expound/expound {:mvn/version "0.8.9"}
-                      orchestra/orchestra {:mvn/version "2021.01.01-1"}
-                      juxt/clip {:mvn/version "0.22.0"}
-                      aero/aero {:mvn/version "1.1.6"}
-                      org.clojure/tools.namespace {:mvn/version "1.1.0"}
-                      lambdaisland/kaocha {:mvn/version "1.0.829"}}}
-  :test-chrome {:extra-paths ["test" "cljs-test-runner-out/gen"]
-                :extra-deps  {org.clojure/clojurescript {:mvn/version "1.10.844"}
-                              olical/cljs-test-runner   {:mvn/version "3.8.0" :exclusions [org.clojure/clojurescript]}}
-                ;:main-opts   ["-m" "cljs-test-runner.main" "-c" "test/cljs-test-opts.edn -x chrome-headless"]
-                :main-opts ["-m" "cljs-test-runner.main" "-c" "test/cljs-test-opts.edn" "-x" "chrome-headless"]}
-  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
-        :exec-fn hf.depstar/jar
-        :exec-args {:jar "taiwan-id.jar" :sync-pom true}}
-  :install {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
-            :exec-fn deps-deploy.deps-deploy/deploy
-            :exec-args {:installer :local :artifact "taiwan-id.jar"}}
-  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
-           :exec-fn deps-deploy.deps-deploy/deploy
-           :exec-args {:installer :remote :artifact "taiwan-id.jar"}}}}
+ {:build {:deps {io.github.seancorfield/build-clj
+                 {:git/tag "v0.6.4" :git/sha "c21cfde"}}
+          :ns-default build}
+  :reveal-font-nrepl
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.273"}
+                nrepl/nrepl   {:mvn/version "0.9.0"}}
+   :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"Sarasa Mono TC\",:font-size,16}"]
+   :main-opts  ["-m" "nrepl.cmdline"
+                "--middleware" "[vlaaad.reveal.nrepl/middleware]"]}}}

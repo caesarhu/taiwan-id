@@ -2,55 +2,80 @@
   (:require [clojure.test
              :refer [deftest is are testing run-tests]
              :refer-macros [deftest is are testing run-tests]]
-            [caesarhu.taiwan-id :refer [taiwan-id? id-gen]]
-            [clojure.spec.alpha :as s]
-            [clojure.test.check.generators]
-            [clojure.spec.gen.alpha :as gen]))
+            [caesarhu.taiwan-id :refer [validate? id arc-id arc-old all-id]]
+            [malli.core :as m]
+            [malli.generator :as mg]))
 
-(deftest taiwan-id-right-test
+(deftest id-right-test
   (testing "正確身分證字號檢核測試..."
-    (is (= "S149312189" (taiwan-id? "S149312189")))
-    (is (= "P266749590" (taiwan-id? "P266749590")))
-    (is (= "G177415338" (taiwan-id? "G177415338")))
-    (is (= "J237413452" (taiwan-id? "J237413452")))
-    (is (= "E283427157" (taiwan-id? "E283427157")))
-    (is (= "W253872373" (taiwan-id? "w253872373")))
-    (is (= "H168344612" (taiwan-id? "h168344612")))
-    (is (= "R202248765" (taiwan-id? "r202248765")))
-    (is (= "C233825816" (taiwan-id? "c233825816")))
-    (is (= "X230512363" (taiwan-id? "x230512363")))))
+    (is (= true (validate? "S149312189" :id)))
+    (is (= true (validate? "P266749590" :id)))
+    (is (= true (validate? "G177415338" :id)))
+    (is (= true (validate? "J237413452" :id)))
+    (is (= true (validate? "E283427157" :id)))
+    (is (= true (validate? "W253872373")))
+    (is (= true (validate? "H168344612")))
+    (is (= true (validate? "R202248765")))
+    (is (= true (validate? "C233825816")))
+    (is (= true (validate? "X230512363")))
+    (is (= true (m/validate id "S149312189")))
+    (is (= true (m/validate id "P266749590")))
+    (is (= true (m/validate id "G177415338")))
+    (is (= true (m/validate id "J237413452")))
+    (is (= true (m/validate id "E283427157")))
+    (is (= true (m/validate all-id "W253872373")))
+    (is (= true (m/validate all-id "H168344612")))
+    (is (= true (m/validate all-id "R202248765")))
+    (is (= true (m/validate all-id "C233825816")))
+    (is (= true (m/validate all-id "X230512363")))))
 
-(deftest invalid-id-wrong-test
+(deftest id-wrong-test
   (testing "錯誤身分證字號檢核測試..."
-    (is (not (taiwan-id? "S14931189")))
-    (is (not (taiwan-id? "P266749591")))
-    (is (not (taiwan-id? "G177415438")))
-    (is (not (taiwan-id? "J137413452")))
-    (is (not (taiwan-id? "E2834271575")))
-    (is (not (taiwan-id? "W25386237354")))
-    (is (not (taiwan-id? "H169344612")))
-    (is (not (taiwan-id? "R202258765")))
-    (is (not (taiwan-id? "C239825816")))
-    (is (not (taiwan-id? "X231512363")))))
+    (is (not (validate? "S14931189" :id)))
+    (is (not (validate? "P266749591" :id)))
+    (is (not (validate? "G177415438" :id)))
+    (is (not (validate? "J137413452" :id)))
+    (is (not (validate? "E2834271575" :id)))
+    (is (not (validate? "W25386237354")))
+    (is (not (validate? "H169344612")))
+    (is (not (validate? "R202258765")))
+    (is (not (validate? "C239825816")))
+    (is (not (validate? "X231512363")))
+    (is (not (m/validate id "S14931189")))
+    (is (not (m/validate id "P266749591")))
+    (is (not (m/validate id "G177415438")))
+    (is (not (m/validate id "J137413452")))
+    (is (not (m/validate id "E2834271575")))
+    (is (not (m/validate all-id "W25386237354")))
+    (is (not (m/validate all-id "H169344612")))
+    (is (not (m/validate all-id "R202258765")))
+    (is (not (m/validate all-id "C239825816")))
+    (is (not (m/validate all-id "X231512363")))))
 
-(deftest foreigner-id-test
-  (testing "外來人口統一證號檢核測試..."
-    (is (= "A919518067" (taiwan-id? "A919518067")))
-    (is (= "SC19810209" (taiwan-id? "SC19810209")))))
+(deftest arc-id-test
+  (testing "居留證號檢核測試..."
+    (is (= true (validate? "A823406603" :arc-id)))
+    (is (= true (validate? "A823406603")))
+    (is (= false (validate? "A823406600" :arc-id)))
+    (is (not (validate? "A823406600")))
+    (is (= true (m/validate arc-id "A823406603")))
+    (is (= false (m/validate arc-id "A823406600")))
+    (is (= true (m/validate all-id "A823406603")))
+    (is (not (m/validate all-id "A823406600")))))
 
-(deftest optional-id-test
-  (testing "證號類別測試..."
-    (is (nil? (taiwan-id? "A919518067" [:taiwan :foreign-old])))
-    (is (nil? (taiwan-id? "SC19810209" [:taiwan :foreign])))
-    (is (nil? (taiwan-id? "S149312189" [:foreign :foreign-old])))
-    (is (= "A919518067" (taiwan-id? "A919518067" [:foreign])))
-    (is (= "SC19810209" (taiwan-id? "SC19810209" [:foreign-old])))
-    (is (= "S149312189" (taiwan-id? "S149312189" [:taiwan])))))
+(deftest arc-old-test
+  (testing "舊版居留證號檢核測試..."
+    (is (= true (validate? "AC13329740" :arc-old)))
+    (is (= true (validate? "AC13329740")))
+    (is (= false (validate? "AC13329749" :arc-old)))
+    (is (not (validate? "AC13329749")))
+    (is (= true (m/validate arc-old "AC13329740")))
+    (is (= false (m/validate arc-old "AC13329749")))
+    (is (= true (m/validate all-id "AC13329740")))
+    (is (not (m/validate all-id "AC13329749")))))
 
-(deftest id-gen-test
-  (let [sample (gen/sample id-gen 100)]
-    (is (= (count sample)
-           (->> sample
-                (map taiwan-id?)
-                (filter some?)
-                (count))))))
+(deftest generator-test
+  (testing "證號產生器測試"
+    (is (= 100 (->> (mg/sample all-id {:size 100})
+                    (filter #(m/validate all-id %))
+                    count)))))
