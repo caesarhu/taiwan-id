@@ -14,6 +14,11 @@
    :arc-id #"^[A-Z][89]\d{8}$"
    :arc-old #"^[A-Z][A-D]\d{8}$"})
 
+(def sex-map
+  {:id [\1 \2]
+   :arc-id [\8 \9]
+   :arc-old [\A \B \C \D]})
+
 (def alphabet-map
   (zipmap alphabets number-vector))
 
@@ -34,7 +39,7 @@
   "產生檢查嗎"
   [id]
   (let [n (->> (map * weight-code (id->vector id))
-               butlast
+               (take 10)
                (apply +))]
     (-> n (mod 10) (#(- 10 %)) (mod 10) str first)))
 

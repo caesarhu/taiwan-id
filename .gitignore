@@ -20,3 +20,6 @@ pom.xml.asc
 /cljs-test-runner-out
 /.cpcache
 /.lsp
+/.clj-kondo
+/.calva
+/.portal
