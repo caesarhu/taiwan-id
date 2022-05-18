@@ -1,7 +1,6 @@
 (ns caesarhu.taiwan-id
   (:require [clojure.test.check.generators :as gen]
-            [malli.core :as m]
-            [malli.generator :as mg]))
+            [malli.core :as m]))
 
 (def alphabets "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 (def weight-code [1 9 8 7 6 5 4 3 2 1 1])
@@ -61,7 +60,12 @@
 
 (defn generator
   [opt]
-  (gen/fmap correct-id (mg/generator [:re (opt re-map)])))
+  (let [digits (take 10 alphabets)]
+    (gen/fmap #(correct-id (apply str %))
+              (apply gen/tuple
+               (gen/elements (drop 10 alphabets))
+               (gen/elements (opt sex-map))
+               (repeat 8 (gen/elements digits))))))
 
 (defn schema-generate
   [opt message]
@@ -82,10 +86,3 @@
 
 (def all-id
   [:or id arc-id arc-old])
-
-(comment
-  (mg/sample id)
-  (mg/sample arc-id)
-  (mg/sample arc-old)
-  (mg/sample all-id)
-  )
