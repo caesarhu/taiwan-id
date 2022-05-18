@@ -1,6 +1,7 @@
 (ns caesarhu.taiwan-id
   (:require [clojure.test.check.generators :as gen]
-            [malli.core :as m]))
+            [malli.core :as m]
+            [malli.generator :as mg]))
 
 (def alphabets "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 (def weight-code [1 9 8 7 6 5 4 3 2 1 1])
