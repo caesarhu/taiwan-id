@@ -2,10 +2,12 @@
   (:require [clojure.test.check.generators :as gen]))
 
 (def ^:private alphabets "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-(def ^:private weight-code [1 9 8 7 6 5 4 3 2 1 1])
 (def ^:private number-vector 
   [0 1 2 3 4 5 6 7 8 9
    10 11 12 13 14 15 16 17 34 18 19 20 21 22 35 23 24 25 26 27 28 29 32 30 31 33])
+(def ^:private alphabet-map
+  (zipmap alphabets number-vector))
+(def ^:private weight-code [1 9 8 7 6 5 4 3 2 1 1])
 
 (def ^:private re-map
   {:id #"^[A-Z][12]\d{8}$"
@@ -17,21 +19,10 @@
    :arc-id [\8 \9]
    :arc-old [\A \B \C \D]})
 
-(def ^:private alphabet-map
-  (zipmap alphabets number-vector))
-
-(defn- div-mod-10
-  [n]
-  [(quot n 10) (mod n 10)])
-
-(defn- char->number
-  [c]
-  (->> c alphabet-map div-mod-10))
-
 (defn- id->vector
   [id]
-  (let [v (map char->number id)]
-    (cons (ffirst v) (map last v))))
+  (let [v (map alphabet-map id)]
+    (cons (quot (first v) 10) (map #(mod % 10) v))))
 
 (defn check-code
   "產生檢查碼!"
@@ -39,23 +30,15 @@
   (let [n (->> (map * weight-code (id->vector id))
                (take 10)
                (apply +))]
-    (-> n (mod 10) (- 10) - (mod 10) str first)))
+    (-> n (mod 10) (- 10) - (mod 10))))
 
-(defn is-id?
-  ([id opt]
-   (if (= opt :all)
-     (or (is-id? id :id)
-         (is-id? id :arc-id)
-         (is-id? id :arc-old))
-     (and (string? id)
-          (re-matches (opt re-map) id)
-          (= (last id) (check-code id)))))
-  ([id]
-   (is-id? id :all)))
+(defn- valid?
+  [id]
+  (= (last id) (-> (check-code id) str first)))
 
 (defn- correct-id
   [id]
-  (str (apply str (butlast id)) (check-code id)))
+  (str (apply str (take 9 id)) (check-code id)))
 
 (defn- generator
   [opt]
@@ -70,7 +53,9 @@
 (defn- schema-generate
   [opt message]
   [:and {:gen/gen (generator opt)}
-   :string [:fn {:error/message message} #(is-id? % opt)]])
+   :string
+   [:re {:error/message message} (opt re-map)]
+   [:fn {:error/message message} valid?]])
 
 (def id
   (schema-generate :id "身分證號錯誤!"))

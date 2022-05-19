@@ -23,22 +23,6 @@ Ran 5 tests containing 57 assertions.
 0 failures, 0 errors.
 ```
 
-提供以下檢核函數：
-
-```clojure
-(require '[caesarhu.taiwan-id :refer :all])
-(is-id? id) ; 台灣身分證號檢核, 包含身分證號、新版及舊版居留證號
-(is-id? id :id) ; 僅檢核身分證號
-(is-id? id :arc-id) ; 僅檢核新版居留證號
-(is-id? id :arc-old) ; 僅檢核舊版居留證號
-
-(is-id? "U257566542")
-=> true
-
-(is-id? "U257566547")
-=> nil
-```
-
 定義了id、arc-id、arc-old、id-or-arc 供 malli 運用
 
 ```clojure
