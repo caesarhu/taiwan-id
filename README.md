@@ -1,5 +1,6 @@
-<a href="https://clojars.org/caesarhu/taiwan-id">
-  <img alt="Clojars Version" src="https://img.shields.io/clojars/v/caesarhu/taiwan-id"></a>
+
+[![Clojars Project](https://img.shields.io/clojars/v/net.clojars.caesarhu/taiwan-id.svg)](https://clojars.org/net.clojars.caesarhu/taiwan-id)
+
 
 # taiwan-id
 
@@ -12,11 +13,11 @@ clojure/script 台灣身分證字號檢核程式庫，包含新版及舊版居�
 Run unit test.
 
 ```bash
-clj -X:test/run
+clj -X:test:test/run
 [(.........................................................)]
 5 tests, 57 assertions, 0 failures.
 
-clj -M:test/cljs
+clj -M:test:test/cljs
 Testing caesarhu.taiwan-id-test
 Ran 5 tests containing 57 assertions.
 0 failures, 0 errors.

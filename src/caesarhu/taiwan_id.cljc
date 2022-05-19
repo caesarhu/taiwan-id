@@ -1,7 +1,5 @@
 (ns caesarhu.taiwan-id
-  (:require [clojure.test.check.generators :as gen]
-            [malli.core :as m]
-            [malli.generator :as mg]))
+  (:require [clojure.test.check.generators :as gen]))
 
 (def ^:private alphabets "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 (def ^:private weight-code [1 9 8 7 6 5 4 3 2 1 1])
@@ -41,7 +39,7 @@
   (let [n (->> (map * weight-code (id->vector id))
                (take 10)
                (apply +))]
-    (-> n (mod 10) (#(- 10 %)) (mod 10) str first)))
+    (-> n (mod 10) (- 10) - (mod 10) str first)))
 
 (defn is-id?
   ([id opt]
@@ -71,11 +69,8 @@
 
 (defn- schema-generate
   [opt message]
-  (m/-simple-schema
-   {:type :string
-    :pred #(is-id? % opt)
-    :type-properties {:error/message message
-                      :gen/gen (generator opt)}}))
+  [:and {:gen/gen (generator opt)}
+   :string [:fn {:error/message message} #(is-id? % opt)]])
 
 (def id
   (schema-generate :id "身分證號錯誤!"))
@@ -90,7 +85,12 @@
   [:or id arc-id arc-old])
 
 (comment
+  (require '[malli.core :as m])
+  (require '[malli.generator :as mg])
+  (require '[malli.error :as me])
   (mg/sample id)
   (mg/sample id-or-arc {:size 100})
   (mg/sample arc-id)
+  (mg/sample arc-old)
   )
+  
