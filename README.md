@@ -16,8 +16,8 @@ clj -X:test/run
 [(.........................................................)]
 5 tests, 57 assertions, 0 failures.
 
+clj -M:test/cljs
 Testing caesarhu.taiwan-id-test
-
 Ran 5 tests containing 57 assertions.
 0 failures, 0 errors.
 ```
