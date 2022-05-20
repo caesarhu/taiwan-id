@@ -3,7 +3,7 @@
   (:require [clojure.tools.build.api :as b] ; for b/git-count-revs
             [org.corfield.build :as bb]))
 
-(def lib 'com.github.caesarhu/taiwan-id)
+(def lib 'net.clojars.caesarhu/taiwan-id)
 (def version "0.2.1")
 #_ ; alternatively, use MAJOR.MINOR.COMMITS:
 (def version (format "1.0.%s" (b/git-count-revs nil)))
