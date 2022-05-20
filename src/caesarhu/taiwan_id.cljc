@@ -54,20 +54,20 @@
    [:fn {:error/message message} valid?]])
 
 (def id
-  "身分證號 schema,\n
-   (malli.core/validate \"R272329855\" => true\n
+  "身分證號 schema,\
+   (malli.core/validate \"R272329855\" => true\
    (malli.core/validate \"R272329856\" => false"
   (schema-generate :id "身分證號錯誤!"))
 
 (def arc-id
-  "居留證號 schema,\n
-   (malli.core/validate \"S900226462\" => true\n
+  "居留證號 schema,\
+   (malli.core/validate \"S900226462\" => true\
    (malli.core/validate \"S900226463\" => false"
   (schema-generate :arc-id "居留證號錯誤!"))
 
 (def arc-old
-  "舊版居留證號 schema,\n
-   (malli.core/validate \"RA18234988\" => true\n
+  "舊版居留證號 schema,\
+   (malli.core/validate \"RA18234988\" => true\
    (malli.core/validate \"RA18234989\" => false"
   (schema-generate :arc-old "舊版居留證號錯誤!"))
 
