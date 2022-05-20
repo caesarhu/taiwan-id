@@ -5,8 +5,7 @@
 (def ^:private number-vector 
   [0 1 2 3 4 5 6 7 8 9
    10 11 12 13 14 15 16 17 34 18 19 20 21 22 35 23 24 25 26 27 28 29 32 30 31 33])
-(def ^:private alphabet-map
-  (zipmap alphabets number-vector))
+(def ^:private alphabet-map (zipmap alphabets number-vector))
 (def ^:private weight-code [1 9 8 7 6 5 4 3 2 1 1])
 
 (def ^:private re-map
@@ -19,18 +18,16 @@
    :arc-id [\8 \9]
    :arc-old [\A \B \C \D]})
 
-(defn- id->vector
-  [id]
-  (let [v (map alphabet-map id)]
-    (cons (quot (first v) 10) (map #(mod % 10) v))))
-
-(defn check-code
+(defn- check-code
   "產生檢查碼!"
   [id]
-  (let [n (->> (map * weight-code (id->vector id))
+  (let [v (map alphabet-map id)
+        v2 (cons (quot (first v) 10) (map #(mod % 10) v))
+        r (->> (map * weight-code v2)
                (take 10)
-               (apply +))]
-    (-> n (mod 10) (- 10) - (mod 10))))
+               (apply +)
+               (#(mod % 10)))]
+    (-> (- 10 r) (mod 10))))
 
 (defn- valid?
   [id]
@@ -57,15 +54,21 @@
    [:fn {:error/message message} valid?]])
 
 (def id
-  "身分證號 schema"
+  "身分證號 schema,
+   (malli.core/validate \"R272329855\" => true
+   (malli.core/validate \"R272329856\" => false"
   (schema-generate :id "身分證號錯誤!"))
 
 (def arc-id
-  "居留證號 schema"
+  "居留證號 schema,
+   (malli.core/validate \"S900226462\" => true
+   (malli.core/validate \"S900226463\" => false"
   (schema-generate :arc-id "居留證號錯誤!"))
 
 (def arc-old 
-  "舊版居留證號 schema"
+  "舊版居留證號 schema,
+   (malli.core/validate \"RA18234988\" => true
+   (malli.core/validate \"RA18234989\" => false"
   (schema-generate :arc-old "舊版居留證號錯誤!"))
 
 (def id-or-arc 
@@ -76,7 +79,6 @@
   (require '[malli.core :as m])
   (require '[malli.generator :as mg])
   (require '[malli.error :as me])
-  (m/validate id 123)
   (m/validate id-or-arc "M191382438")
   (mg/sample id)
   (mg/sample id-or-arc {:size 100})
