@@ -64,4 +64,6 @@ Ran 5 tests containing 57 assertions.
 
 ## Legal
 
-Copyright © 2020 FIXME
+Copyright© 2020-2022 Caesar Hu
+
+Distributed under the Eclipse Public License version 1.0.
