@@ -53,7 +53,6 @@
 (defn- schema-generate
   [opt message]
   [:and {:gen/gen (generator opt)}
-   :string
    [:re {:error/message message} (opt re-map)]
    [:fn {:error/message message} valid?]])
 
@@ -77,7 +76,7 @@
   (require '[malli.core :as m])
   (require '[malli.generator :as mg])
   (require '[malli.error :as me])
-  (m/validate id "M191382438")
+  (m/validate id 123)
   (m/validate id-or-arc "M191382438")
   (mg/sample id)
   (mg/sample id-or-arc {:size 100})
