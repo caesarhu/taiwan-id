@@ -73,7 +73,7 @@
 
 (def id-or-arc 
   "身分證號、居留證號及舊版居留證號 schema"
-  [:or {:gen/gen (gen/frequency [[7 (generator :id)] [2 (generator :arc-id)] [1 (generator :arc-old)]])}
+  [:or {:gen/gen (gen/frequency [[80 (generator :id)] [15 (generator :arc-id)] [5 (generator :arc-old)]])}
    id arc-id arc-old])
 
 (comment
