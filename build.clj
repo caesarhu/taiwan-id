@@ -16,6 +16,7 @@
       (assoc :lib lib :version version)
       (bb/run-tests)
       (bb/clean)
+      (assoc :src-pom "template/pom.xml")
       (bb/jar)))
 
 (defn install "Install the JAR locally." [opts]

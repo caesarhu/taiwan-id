@@ -8,6 +8,11 @@ clojure/script 台灣身分證字號檢核程式庫，包含新版及舊版居�
 
 ## Developing
 
+run nrepl.
+```bash
+clj -M:test:reveal-font-nrepl
+```
+
 ### Unit test
 
 Run unit test.

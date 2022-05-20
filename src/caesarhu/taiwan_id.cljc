@@ -58,21 +58,27 @@
    [:fn {:error/message message} valid?]])
 
 (def id
+  "身分證號 schema"
   (schema-generate :id "身分證號錯誤!"))
 
 (def arc-id
+  "居留證號 schema"
   (schema-generate :arc-id "居留證號錯誤!"))
 
-(def arc-old
+(def arc-old 
+  "舊版居留證號 schema"
   (schema-generate :arc-old "舊版居留證號錯誤!"))
 
-(def id-or-arc
+(def id-or-arc 
+  "身分證號、居留證號及舊版居留證號 schema"
   [:or id arc-id arc-old])
 
 (comment
   (require '[malli.core :as m])
   (require '[malli.generator :as mg])
   (require '[malli.error :as me])
+  (m/validate id "M191382438")
+  (m/validate id-or-arc "M191382438")
   (mg/sample id)
   (mg/sample id-or-arc {:size 100})
   (mg/sample arc-id)
