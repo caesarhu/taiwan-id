@@ -56,33 +56,33 @@
 (def id
   "身分證號 schema,
    
-   (malli.core/validate \"R272329855\" => true
+   (malli.core/validate id \"R272329855\" => true
 
-   (malli.core/validate \"R272329856\" => false"
+   (malli.core/validate id \"R272329856\" => false"
   (schema-generate :id "身分證號錯誤!"))
 
 (def arc-id
   "居留證號 schema,
    
-   (malli.core/validate \"S900226462\" => true
+   (malli.core/validate arc-id \"S900226462\" => true
 
-   (malli.core/validate \"S900226463\" => false"
+   (malli.core/validate arc-id \"S900226463\" => false"
   (schema-generate :arc-id "居留證號錯誤!"))
 
 (def arc-old
   "舊版居留證號 schema,
    
-   (malli.core/validate \"RA18234988\" => true
+   (malli.core/validate arc-old \"RA18234988\" => true
 
-   (malli.core/validate \"RA18234989\" => false"
+   (malli.core/validate arc-old \"RA18234989\" => false"
   (schema-generate :arc-old "舊版居留證號錯誤!"))
 
 (def id-or-arc 
   "身分證號、居留證號及舊版居留證號 schema
    
-   (malli.core/validate \"RA18234988\" => true
+   (malli.core/validate id-or-arc \"RA18234988\" => true
    
-   (malli.core/validate \"RA18234989\" => false"
+   (malli.core/validate id-or-arc \"RA18234989\" => false"
   [:or {:gen/gen (gen/frequency [[80 (generator :id)] [15 (generator :arc-id)] [5 (generator :arc-old)]])}
    id arc-id arc-old])
 
