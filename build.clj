@@ -4,7 +4,7 @@
             [org.corfield.build :as bb]))
 
 (def lib 'net.clojars.caesarhu/taiwan-id)
-(def version "0.2.5")
+(def version "0.2.6")
 #_ ; alternatively, use MAJOR.MINOR.COMMITS:
 (def version (format "1.0.%s" (b/git-count-revs nil)))
 

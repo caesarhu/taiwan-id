@@ -21,13 +21,15 @@
 (defn- check-code
   "產生檢查碼!"
   [id]
-  (let [v (map alphabet-map id)
-        v2 (cons (quot (first v) 10) (map #(mod % 10) v))
-        r (->> (map * weight-code v2)
-               (take 10)
-               (apply +)
-               (#(mod % 10)))]
-    (-> (- 10 r) (mod 10))))
+  (as-> id $
+    (map alphabet-map $)
+    (cons (quot (first $) 10) (map #(mod % 10) $))
+    (map * weight-code $)
+    (take 10 $)
+    (apply + $)
+    (mod $ 10)
+    (- 10 $)
+    (mod $ 10)))
 
 (defn- valid?
   [id]
@@ -90,7 +92,7 @@
   (require '[malli.core :as m])
   (require '[malli.generator :as mg])
   (require '[malli.error :as me])
-  (m/validate id-or-arc "M191382438")
+  (m/validate id "M191382437")
   (mg/sample id)
   (mg/sample id-or-arc {:size 100})
   (mg/sample arc-id)
