@@ -1,5 +1,6 @@
 
 [![Clojars Project](https://img.shields.io/clojars/v/net.clojars.caesarhu/taiwan-id.svg)](https://clojars.org/net.clojars.caesarhu/taiwan-id)
+[![cljdoc badge](https://cljdoc.org/badge/net.clojars.caesarhu/taiwan-id)](https://cljdoc.org/d/net.clojars.caesarhu/taiwan-id)
 
 
 # taiwan-id
