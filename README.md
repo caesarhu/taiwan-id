@@ -30,7 +30,7 @@ Ran 5 tests containing 57 assertions.
 0 failures, 0 errors.
 ```
 
-定義了id、arc-id、arc-old、id-or-arc 供 malli 運用
+定義了id、arc-id、arc-old、id-or-arc 供 [malli](https://github.com/metosin/malli) 運用
 
 ```clojure
 (require '[malli.core :as m])
