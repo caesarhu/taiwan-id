@@ -45,9 +45,10 @@
         letters (drop 10 alphabets)
         sex (opt sex-map)]
     (gen/fmap #(correct-id (apply str %))
-              (->> (concat [letters sex] (repeat 8 digits))
-                   (map gen/elements)
-                   (apply gen/tuple)))))
+              (apply gen/tuple
+                     (gen/elements letters)
+                     (gen/elements sex)
+                     (repeat 8 (gen/elements digits))))))
 
 (defn- schema-generate
   [opt message]
