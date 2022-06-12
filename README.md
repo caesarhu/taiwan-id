@@ -5,7 +5,7 @@
 
 # taiwan-id
 
-clojure/script 台灣身分證字號檢核程式庫，包含新版及舊版居留證號檢核
+clojure/script 台灣身分證字號檢核程式庫，包含新版居留證號及舊版居留證號檢核
 
 ## Developing
 配合使用[Practicalli Clojure `deps.edn`](https://github.com/practicalli/clojure-deps-edn)開發。
